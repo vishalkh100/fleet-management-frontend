@@ -1,11 +1,15 @@
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './LoginComponent/Login';
 import './App.css';
 import { Registration } from './RegistrationComponents/Registration';
 
 function App() {
   return (
+    
     <div className="App">
       <header className="App-header">
+      <Login/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
