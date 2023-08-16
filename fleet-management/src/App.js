@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { Registration } from './RegistrationComponents/Registration';
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
         >
           Learn React
           <h1>Hello Group 2...Welcome</h1>
+   
         </a>
       </header>
+      <Registration/>
     </div>
   );
 }
