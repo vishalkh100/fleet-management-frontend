@@ -8,11 +8,13 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import 'react-phone-number-input/style.css';
 
 
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/;
 
 
-export function Registration() {
+export function Registration() 
+{
 
-  
+  const [passwordError, setPasswordError] = useState('');
 
 
   const [passwords, setPasswords] = useState({
@@ -39,6 +41,21 @@ const handleChange = (event) => {
   const { name, value } = event.target;
   setUser((prevUser) => ({ ...prevUser, [name]: value }));
 
+
+  //regex validations
+  switch (name) {
+    case 'password':
+      if (!passwordRegex.test(value)) 
+      {
+        // Handle invalid password
+        validatePassword(value); // Validate password criteria
+
+      }
+      break;
+      default:
+        break;
+    }
+
  // Update passwords and check if they match
   if (name === 'password' || name === 'confirmPassword') {
     setPasswords((prevPasswords) => ({ ...prevPasswords, [name]: value }));
@@ -52,22 +69,17 @@ const handleChange = (event) => {
   }
 };
 
-// const handleChange2=(event)=>{
-
-//   const { name, value } = event.target;
-//   if (user.name === 'password' || name === 'confirmPassword') {
-//     setPasswords((prevPasswords) => ({ ...prevPasswords, [name]: value }));
-//     if (name === 'confirmPassword' && passwords.password !== value) {
-//       setPasswordsMatch(false);
-//     } else if (user.name === 'password' && passwords.confirmPassword !== value) {
-//       setPasswordsMatch(false);
-//     } else {
-//       setPasswordsMatch(true);
-//     }
-//   }
-// }
-
-
+const validatePassword = (password) => {
+  if (password.length < 8) {
+    setPasswordError('Password should be at least 8 characters long.');
+  } else if (password.length > 15) {
+    setPasswordError('Password should not exceed 15 characters.');
+  } else if (!passwordRegex.test(password)) {
+    setPasswordError('Password must contain letters and numbers and not special characters like ,!,@,#,*,%');
+  } else {
+    setPasswordError('');
+  }
+};
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -93,15 +105,14 @@ const handleChange = (event) => {
  event.preventDefault();
   };
 
-
-
   return (
     <div className="form-container">
+     
     <Form noValidate validated={validated} onSubmit={handleSubmit} className="border-form">
   
-      <Row className="mb-3 align-items-center" >
+      <Row className="mb-3 justify-content-center" >
         <Form.Group as={Col} md="6" controlId="validationCustom01" >
-        <Form.Label column md="2">First name</Form.Label>
+        <Form.Label >First name</Form.Label>
           <Form.Control required type="text" placeholder="First name" /*defaultValue="Shruti"*/ name="firstName" onChange={handleChange}/>
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
@@ -113,23 +124,23 @@ const handleChange = (event) => {
         </Form.Group>   
       </Row>
      
-      <Row className="mb-3" >
-        <Form.Group as={Col} md="10" controlId="validationCustom01">
+      <Row className="mb-3 justify-content-center" >
+        <Form.Group as={Col} md="6" controlId="validationCustom01">
           <Form.Label>Address-1</Form.Label>
           <Form.Control required type="text" placeholder="Street no,Area" name="address1" onChange={handleChange} />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
-      </Row>
+     
 
-    <Row className="mb-3" >
-      <Form.Group as={Col} md="10" controlId="validationCustom01">
+   
+      <Form.Group as={Col} md="6" controlId="validationCustom01">
       <Form.Label>Address-2</Form.Label>
       <Form.Control required type="text"  placeholder="Identical mark" name="address2" onChange={handleChange}/>
       <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
     </Form.Group>
   </Row>
 
-  <Row className="mb-3">
+  <Row className="mb-3 justify-content-center">
         <Form.Group as={Col} md="6" controlId="validationCustom03">
           <Form.Label>City</Form.Label>
           <Form.Control type="text" placeholder="City" required name="city" onChange={handleChange}/>
@@ -147,7 +158,7 @@ const handleChange = (event) => {
         </Form.Group>
     </Row>
 
-    <Row className="mb-3">
+    <Row className="mb-3 justify-content-center">
         <Form.Group as={Col} md="6" controlId="validationCustom03">
           <Form.Label>Driving License</Form.Label>
           <Form.Control type="text" placeholder="Driving License" required name="drivingLicence" onChange={handleChange} />
@@ -165,7 +176,7 @@ const handleChange = (event) => {
         </Form.Group>
     </Row>
 
-   <Row className="mb-3">
+   <Row className="mb-3 justify-content-center">
         <Form.Group as={Col} md="6" controlId="validationCustom03">
           <Form.Label>Passport No</Form.Label>
           <Form.Control type="text" placeholder="Passport No" required name="passportNumber" onChange={handleChange}/>
@@ -189,9 +200,9 @@ const handleChange = (event) => {
         </Form.Group>
     </Row>
 
-     <Row className="mb-3">
+     <Row className="mb-3 justify-content-center">
         <Form.Group as={Col} md="4" controlId="validationCustom05">
-             <Form.Label>Enter Date of Birth</Form.Label>
+             <Form.Label>Date of Birth</Form.Label>
              <Form.Control type="date" placeholder="Date of Birth" required name="dob" onChange={handleChange} />
        </Form.Group>
       
@@ -214,8 +225,12 @@ const handleChange = (event) => {
       </Dropdown>
     </Form.Group>  
   </Row>
+<hr>
 
-  <Row className="mb-3" >
+..
+..............................
+</hr>
+  <Row className="mb-3 justify-content-center" >
         <Form.Group as={Col} md="10" controlId="validationCustom01">
           <Form.Label>Email Id</Form.Label>
           <Form.Control required type="email" placeholder="name@example.com" name="email" onChange={handleChange} />
@@ -223,14 +238,22 @@ const handleChange = (event) => {
         </Form.Group>
       </Row>
 
-  <Row className="mb-3">
+  <Row className="mb-3 justify-content-center">
     <Form.Group as={Col} md="5" controlId="validationCustom05">
       <Form.Label>Enter password</Form.Label>
-       <Form.Control type="password" name="password" aria-describedby="passwordHelpBlock" onChange={handleChange} required/>
-         <Form.Text id="passwordHelpBlock" muted>
+       <Form.Control type="password" name="password" aria-describedby="passwordHelpBlock" onChange={handleChange} required isInvalid={passwordError !== ''}/>
+       <Form.Control.Feedback type="invalid">
+       {passwordError || (
+          <div>
+            Your password must be 8-15 characters long, contain letters and numbers and must not contain spaces, special characters, or emoji.
+            </div>
+        )}
+      </Form.Control.Feedback>
+         
+         {/* <Form.Text id="passwordHelpBlock" muted>
            Your password must be 8-20 characters long, contain letters and numbers,
             and must not contain spaces, special characters, or emoji.
-      </Form.Text>
+      </Form.Text> */}
       </Form.Group>
 
       <Form.Group as={Col} md="5" controlId="validationCustom05">
@@ -248,7 +271,7 @@ const handleChange = (event) => {
       {/* <input type="Submit" value="Submit"  disabled={!passwordsMatch}/>
       <input type="button" value="clear"/> */}
 
-<Row className="mb-3">
+<Row className="mb-3 justify-content-center">
   <Col md={{ span: 3.3, offset: 3.5 }}>
     <input type="submit" value="Submit" className="btn custom-submit-btn mr-2" disabled={!passwordsMatch} />
     <input type="button" value="Clear" className="btn custom-clear-btn" />
