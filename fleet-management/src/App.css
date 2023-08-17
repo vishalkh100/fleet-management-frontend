@@ -56,3 +56,33 @@
   font-size: 12px;
   margin-top: 5px;
 }
+
+/*Extra Added*/
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150vh;
+}
+
+.border-form {
+  border: 1px solid #260d0d;
+  padding: 20px;
+}
+
+.custom-submit-btn {
+  background-color: #21092b28; /* Your desired color */
+  border-color: #270e3c; /* Border color */
+  color: rgb(11, 6, 6); /* Text color */
+  margin-right: 10px;
+
+ 
+}
+
+.custom-clear-btn {
+  background-color: #859022c3; /* Your desired color */
+  border-color: #08090a; /* Border color */
+  color: white; /* Text color */
+  
+}

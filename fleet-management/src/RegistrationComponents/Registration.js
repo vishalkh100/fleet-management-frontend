@@ -5,27 +5,68 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 import Dropdown from 'react-bootstrap/Dropdown';
-import 'react-phone-number-input/style.css'
+import 'react-phone-number-input/style.css';
+
 
 
 
 export function Registration() {
 
-   const[error,setError]=useState("false");
+  
+
+
+  const [passwords, setPasswords] = useState({
+    password: '',
+    confirmPassword: '',
+  });
+
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  
   const [validated, setValidated] = useState(false);
 
   const[user,setUser]=useState('');
 
 
-  const handleChange=(event)=>{
-    const name=event.target.name;
-    const value=event.target.value;
-    setUser(values=>({...user,[name]:value}))
+//   const handleChange=(event)=>{
+//     const name=event.target.name;
+//     const value=event.target.value;
+//     setUser(values=>({...user,[name]:value}))
+// }
 
-   
+const handleChange = (event) => {
 
-  
-}
+
+  const { name, value } = event.target;
+  setUser((prevUser) => ({ ...prevUser, [name]: value }));
+
+ // Update passwords and check if they match
+  if (name === 'password' || name === 'confirmPassword') {
+    setPasswords((prevPasswords) => ({ ...prevPasswords, [name]: value }));
+    if (name === 'confirmPassword' && passwords.password !== value) {
+      setPasswordsMatch(false);
+    } else if (name === 'password' && passwords.confirmPassword !== value) {
+      setPasswordsMatch(false);
+    } else {
+      setPasswordsMatch(true);
+    }
+  }
+};
+
+// const handleChange2=(event)=>{
+
+//   const { name, value } = event.target;
+//   if (user.name === 'password' || name === 'confirmPassword') {
+//     setPasswords((prevPasswords) => ({ ...prevPasswords, [name]: value }));
+//     if (name === 'confirmPassword' && passwords.password !== value) {
+//       setPasswordsMatch(false);
+//     } else if (user.name === 'password' && passwords.confirmPassword !== value) {
+//       setPasswordsMatch(false);
+//     } else {
+//       setPasswordsMatch(true);
+//     }
+//   }
+// }
+
 
 
   const handleSubmit = (event) => {
@@ -33,28 +74,34 @@ export function Registration() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+
+      
     }
 
     console.log(user);
+    
+    setValidated(true);
 
-   
-    // if(user.password===user.confirmPassword)
-    // setError("true");
-    //  else
-    //  alert(setError("false"));
+//     let demo=JSON.stringify(user);
+//     fetch("http://localhost:8080/api/addRegisterUser",
+//     {method:'POST',
+//      headers:{'Content-type':'application/json'},
+//      body: demo})
+//  .then(r=>r)
+
  
-
-    // setValidated(true);
+ event.preventDefault();
   };
 
 
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <div className="form-container">
+    <Form noValidate validated={validated} onSubmit={handleSubmit} className="border-form">
   
-      <Row className="mb-3" >
+      <Row className="mb-3 align-items-center" >
         <Form.Group as={Col} md="6" controlId="validationCustom01" >
-        <Form.Label>First name</Form.Label>
+        <Form.Label column md="2">First name</Form.Label>
           <Form.Control required type="text" placeholder="First name" /*defaultValue="Shruti"*/ name="firstName" onChange={handleChange}/>
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
@@ -142,9 +189,9 @@ export function Registration() {
         </Form.Group>
     </Row>
 
-     <Row>
+     <Row className="mb-3">
         <Form.Group as={Col} md="4" controlId="validationCustom05">
-             <Form.Label>Select Date</Form.Label>
+             <Form.Label>Enter Date of Birth</Form.Label>
              <Form.Control type="date" placeholder="Date of Birth" required name="dob" onChange={handleChange} />
        </Form.Group>
       
@@ -168,10 +215,18 @@ export function Registration() {
     </Form.Group>  
   </Row>
 
-  <Row>
+  <Row className="mb-3" >
+        <Form.Group as={Col} md="10" controlId="validationCustom01">
+          <Form.Label>Email Id</Form.Label>
+          <Form.Control required type="email" placeholder="name@example.com" name="email" onChange={handleChange} />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        </Form.Group>
+      </Row>
+
+  <Row className="mb-3">
     <Form.Group as={Col} md="5" controlId="validationCustom05">
       <Form.Label>Enter password</Form.Label>
-       <Form.Control type="password" name="password" aria-describedby="passwordHelpBlock" onChange={handleChange} />
+       <Form.Control type="password" name="password" aria-describedby="passwordHelpBlock" onChange={handleChange} required/>
          <Form.Text id="passwordHelpBlock" muted>
            Your password must be 8-20 characters long, contain letters and numbers,
             and must not contain spaces, special characters, or emoji.
@@ -180,23 +235,29 @@ export function Registration() {
 
       <Form.Group as={Col} md="5" controlId="validationCustom05">
                <Form.Label>Confirm password</Form.Label>
-              <Form.Control type="password" name="confirmPassword" aria-describedby="passwordHelpBlock" onChange={handleChange}  />
+              <Form.Control type="password" name="confirmPassword" aria-describedby="passwordHelpBlock" onChange={handleChange} required />
+
+              {!passwordsMatch && (<div className="invalid-feedback">Passwords do not match.</div> )}
+              {!passwordsMatch && (<div className="text-danger">Passwords do not match. Please re-enter your passwords.</div>)}
       </Form.Group>
-   
-     <h3>{user.password},{user.confirmPassword}</h3>
-     <h4>{error}</h4>
       
   </Row>
-
-  <h3>{user.firstName},{user.lastName}</h3>
       <br></br>
       
 
-      <input type="Submit" value="Submit"/>
-      <input type="button" value="clear"/>
+      {/* <input type="Submit" value="Submit"  disabled={!passwordsMatch}/>
+      <input type="button" value="clear"/> */}
+
+<Row className="mb-3">
+  <Col md={{ span: 3.3, offset: 3.5 }}>
+    <input type="submit" value="Submit" className="btn custom-submit-btn mr-2" disabled={!passwordsMatch} />
+    <input type="button" value="Clear" className="btn custom-clear-btn" />
+  </Col>
+</Row>
 
     
     </Form>
+    </div>
   );
 }
 
