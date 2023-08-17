@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* This ensures the container takes up the full viewport height */
+}
+
+.forgot-password-link {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
