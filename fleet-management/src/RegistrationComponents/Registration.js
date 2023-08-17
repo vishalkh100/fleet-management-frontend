@@ -226,9 +226,6 @@ const validatePassword = (password) => {
     </Form.Group>  
   </Row>
 <hr>
-
-..
-..............................
 </hr>
   <Row className="mb-3 justify-content-center" >
         <Form.Group as={Col} md="10" controlId="validationCustom01">

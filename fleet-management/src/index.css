@@ -11,3 +11,62 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#p
+{
+  font-size:15px;
+  margin-left: 200px;
+}
+#a
+{
+  font-style:calc();
+  font-size:15px;
+  margin-left: 200px;
+}
+#m
+{
+ margin-top: 600px;
+}
+#i
+{
+   height: 30px;
+   width: 50px;
+}
+#a1
+{
+
+  align-items: center;
+ 
+}
+#img{
+ margin-left:50px ;
+  width: 500px;
+  margin-top: 50px;
+}
+#img1{
+  margin-left: 50px ;
+   width: 500px;
+   margin-top: 50px;
+ }
+ #img2{
+  margin-top: 50px;
+  margin-left: 50px ;
+   width: 500px;
+   height: 200px;
+  
+ }
+ #img3{
+  margin-top: 50px;
+  margin-left: 50px ;
+   width: 500px;
+ }
+ #a3
+ {
+  margin-top: 2px;
+  margin-left: 650px;
+
+ }
+ #h1
+ {
+  height: 20px;
+ }
+ 

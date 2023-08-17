@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './LoginComponent/Login';
 import './App.css';
 import { Registration } from './RegistrationComponents/Registration';
-
+import { Navbar } from './Navbar';
 function App() {
   return (
     
@@ -26,6 +26,7 @@ function App() {
         </a>
       </header>
       <Registration/>
+      <Navbar/>
     </div>
   );
 }
