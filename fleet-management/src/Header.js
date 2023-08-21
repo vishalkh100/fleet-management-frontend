@@ -8,7 +8,7 @@ export function Header() {
     <Navbar  expand="lg"  className="bg-body-tertiary">
       <Container>
         
-      <img src="Images/image2.jpg" id="i"  class="img-rounded" ></img>
+      <img src="/Images/image2.jpg" id="i"  class="img-rounded" alt="car_image"></img>
         <Navbar.Brand href="/home"  >RENTALS CARS</Navbar.Brand>
         
         <Navbar.Brand href="/home"  id="a" > BANNER AREA – Search, Compare & Save</Navbar.Brand>

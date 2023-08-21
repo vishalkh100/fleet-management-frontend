@@ -106,8 +106,10 @@ const validatePassword = (password) => {
   };
 
   return (
-    <div className="form-container">
-     
+    <>
+    <br></br>
+     <h3>Register Here</h3>
+    <div className="Registration_form-container">
     <Form noValidate validated={validated} onSubmit={handleSubmit} className="border-form">
   
       <Row className="mb-3 justify-content-center" >
@@ -278,6 +280,7 @@ const validatePassword = (password) => {
     
     </Form>
     </div>
+    </>
   );
 }
 

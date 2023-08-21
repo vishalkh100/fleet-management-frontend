@@ -3,12 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './LoginComponent/Login';
 import './App.css';
 import { Registration } from './RegistrationComponents/Registration';
-import { Navbar } from './Navbar';
+import { NavbarFront } from './NavbarFront';
 function App() {
   return (
     
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
       <Login/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -24,9 +24,9 @@ function App() {
           <h1>Hello Group 2...Welcome</h1>
    
         </a>
-      </header>
-      <Registration/>
-      <Navbar/>
+      </header> 
+      <Registration/>*/}
+      <NavbarFront/>
     </div>
   );
 }
