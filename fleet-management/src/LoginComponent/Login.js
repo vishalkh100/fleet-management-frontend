@@ -11,6 +11,7 @@ function Login() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [userData, setUserData] = useState(null); // Initialize userData state
+  const[loginUser,setLoginUser]=useState('');
 
   useEffect(() => {
     // This effect will run whenever userData changes
@@ -65,14 +66,13 @@ function Login() {
     <div className="Login_form"> {/* Wrap the form in a centered container */}
       <Form onSubmit={handleSubmit}>
         <Form.Group as={Row} className="mb-2" controlId="formHorizontalEmail">
-          <Form.Label id="r" column sm={3}>
-            Email
-          </Form.Label>
+          <Form.Label id="r" column sm={3}> Email</Form.Label>
           <Col sm={{ span: 10, offset:0.8 }}>
             <Form.Control
               type="email"
               placeholder="Email"
               value={email}
+              name="email"
               onChange={(e) => setEmail(e.target.value)}
             />
             {emailError && <div className="error">{emailError}</div>}
@@ -88,6 +88,7 @@ function Login() {
               type="password"
               placeholder="Password"
               value={password}
+              name="password"
               onChange={(e) => setPassword(e.target.value)}
             />
             {passwordError && <div className="error">{passwordError}</div>}

@@ -4,8 +4,8 @@ import { Image } from './Image';
 export function CompanyInfo() {
   return (
     <>
-    <div  >
-      <Card border="BLACK" style={{ width: '50rem' }} >
+    <div style={{ display: 'flex',justifyContent: 'space-between', alignItems: 'center'  }} >
+      <Card border="BLACK" style={{  flex: 1 }} >
         <Card.Header>Header</Card.Header>
         <Card.Body>
           <Card.Title>COMPANY INFORMATION</Card.Title>
@@ -22,7 +22,10 @@ export function CompanyInfo() {
           </Card.Text>
         </Card.Body>
       </Card>
+
+      <div style={{ flex: 1, marginLeft: '20px' }}>
         <Image height="100px" width="100px"/>   
+        </div>
 
 </div>  
 

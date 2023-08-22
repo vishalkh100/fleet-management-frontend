@@ -17,6 +17,7 @@ root.render(
         <Route path="RegistrationComponents/Registration" element={<Registration />}/>
         <Route path="CompanyInfo" element={<CompanyInfo/>}/>
         <Route path="LoginComponent/Login" element={<Login/>}/>
+        <Route path="LoginComponent/Login" element={<Login/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

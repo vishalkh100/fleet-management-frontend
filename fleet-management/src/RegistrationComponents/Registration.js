@@ -6,13 +6,18 @@ import Row from 'react-bootstrap/Row';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import 'react-phone-number-input/style.css';
-
+import { useNavigate } from 'react-router-dom';
 
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/;
 
 
 export function Registration() 
 {
+
+  const currentDate = new Date().toISOString().split('T')[0]; // Get the current date in the format "YYYY-MM-DD";
+
+  let navigate=useNavigate();
+
 
   const [passwordError, setPasswordError] = useState('');
 
@@ -37,6 +42,7 @@ export function Registration()
 
 const handleChange = (event) => {
 
+  
 
   const { name, value } = event.target;
   setUser((prevUser) => ({ ...prevUser, [name]: value }));
@@ -57,7 +63,8 @@ const handleChange = (event) => {
     }
 
  // Update passwords and check if they match
-  if (name === 'password' || name === 'confirmPassword') {
+  if (name === 'password' || name === 'confirmPassword') 
+  {
     setPasswords((prevPasswords) => ({ ...prevPasswords, [name]: value }));
     if (name === 'confirmPassword' && passwords.password !== value) {
       setPasswordsMatch(false);
@@ -65,6 +72,16 @@ const handleChange = (event) => {
       setPasswordsMatch(false);
     } else {
       setPasswordsMatch(true);
+    }
+  }
+
+  if (name === 'dlValidThrough' || name === 'passportValidUpto' || name === 'dob') {
+    // Convert date string to Date object
+    const dateValue = new Date(value);
+    if (!isNaN(dateValue)) {
+      // Format date as yyyy-MM-dd
+      const formattedDate = dateValue.toISOString().split('T')[0];
+      setUser((prevUser) => ({ ...prevUser, [name]: formattedDate }));
     }
   }
 };
@@ -94,14 +111,15 @@ const validatePassword = (password) => {
     
     setValidated(true);
 
-//     let demo=JSON.stringify(user);
-//     fetch("http://localhost:8080/api/addRegisterUser",
-//     {method:'POST',
-//      headers:{'Content-type':'application/json'},
-//      body: demo})
-//  .then(r=>r)
+    let demo=JSON.stringify(user);
+    fetch("http://localhost:8080/customer/addcustomer",
+    {method:'POST',
+     headers:{'Content-type':'application/json'},
+     body: demo})
+ .then(r=>r)
 
  
+ navigate('/LoginComponent/Login')
  event.preventDefault();
   };
 
@@ -173,7 +191,7 @@ const validatePassword = (password) => {
         </Form.Group>
         <Form.Group as={Col} md="3" controlId="validationCustom05">
           <Form.Label>Valid thru</Form.Label>
-          <Form.Control type="text" placeholder="Valid thru" required  name="dlValidThrough" onChange={handleChange}/>
+          <Form.Control type="date" placeholder="Valid thru" required  name="dlValidThrough" onChange={handleChange}/>
           <Form.Control.Feedback type="invalid">Please provide a valid Date.</Form.Control.Feedback>
         </Form.Group>
     </Row>
@@ -195,7 +213,7 @@ const validatePassword = (password) => {
         </Form.Group>
         <Form.Group as={Col} md="3" controlId="validationCustom05">
           <Form.Label>Valid thru</Form.Label>
-          <Form.Control type="text" placeholder="Valid thru" required name="passportValidUpto" onChange={handleChange}/>
+          <Form.Control type="date" placeholder="Valid thru" required name="passportValidUpto" onChange={handleChange}/>
           <Form.Control.Feedback type="invalid">
             Please provide a valid Date.
           </Form.Control.Feedback>
@@ -205,7 +223,7 @@ const validatePassword = (password) => {
      <Row className="mb-3 justify-content-center">
         <Form.Group as={Col} md="4" controlId="validationCustom05">
              <Form.Label>Date of Birth</Form.Label>
-             <Form.Control type="date" placeholder="Date of Birth" required name="dob" onChange={handleChange} />
+             <Form.Control type="date" min={currentDate} placeholder="Date of Birth" required name="dob" onChange={handleChange} />
        </Form.Group>
       
       <Form.Group as={Col} md="4" controlId="validationCustom05">
