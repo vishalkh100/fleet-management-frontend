@@ -7,6 +7,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import { Registration } from './RegistrationComponents/Registration';
 import { CompanyInfo } from './CompanyInfo';
 import Login from './LoginComponent/Login';
+import MakeResevation  from './Booking/MakeResevation';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +19,7 @@ root.render(
         <Route path="CompanyInfo" element={<CompanyInfo/>}/>
         <Route path="LoginComponent/Login" element={<Login/>}/>
         <Route path="LoginComponent/Login" element={<Login/>}/>
+        <Route path ="Booking/MakeResevation" element={<MakeResevation/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -20,7 +20,7 @@ export function NavbarFront() {
         <Link to="./RegistrationComponents/Registration">Membership Registration</Link> 
         <Link to="./AboutIndia">AboutIndiaDrive</Link> 
         <Link to="/CustomerCare">Customer Care</Link> 
-        <Link to="/AboutUs">About Us</Link> 
+        <Link to="./Booking/MakeResevation">Registration</Link> 
         <Link to="./LoginComponent/Login">Login</Link> 
       </Container>
     </Navbar>
