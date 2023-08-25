@@ -7,7 +7,16 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import { Registration } from './RegistrationComponents/Registration';
 import { CompanyInfo } from './CompanyInfo';
 import Login from './LoginComponent/Login';
-import MakeResevation  from './Booking/MakeResevation';
+import MakeResevation from './Booking/MakeResevation';
+import GetAllState  from './Booking/GetAllState';
+import VehicalSelection from './Booking/VehicalSelection';
+import RentalAddOn from './Booking/RentalAddOn';
+import CustomerInformation from './Booking/CustomerInformation';
+import BlankCustomerInfo from './Booking/BlankCustomerInfo';
+import ConfirmBooking from './Booking/ConfirmBooking';
+import CustomerCare from './CustomerCare';
+import Career from './Career';
+import ServicePage from './ServicePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,7 +28,18 @@ root.render(
         <Route path="CompanyInfo" element={<CompanyInfo/>}/>
         <Route path="LoginComponent/Login" element={<Login/>}/>
         <Route path="LoginComponent/Login" element={<Login/>}/>
-        <Route path ="Booking/MakeResevation" element={<MakeResevation/>}/>
+        <Route path="Booking/MakeResevation" element={<MakeResevation/>}/>
+        <Route path="/CustomerCare" element={<CustomerCare/>}/>
+        <Route path="/Career/" element={<Career/>}/> 
+
+        <Route path="Booking/GetAllState" element={<GetAllState/>}/>
+        <Route path="VehicalSelection" element={<VehicalSelection/>}/>
+        <Route path="RentalAddOn" element={<RentalAddOn/>}/>
+        <Route path="BlankCustomerInfo" element={<BlankCustomerInfo/>}/>
+        <Route path="CustomerInformation" element={<CustomerInformation/>}/>
+        <Route path="ConfirmBooking" element={<ConfirmBooking/>}/>
+        <Route path="/Service/" element={<ServicePage/>}/>
+
         </Route>
       </Routes>
     </BrowserRouter>

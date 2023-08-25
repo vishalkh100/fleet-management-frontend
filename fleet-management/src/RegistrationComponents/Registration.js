@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/;
 
-
 export function Registration() 
 {
 
@@ -99,29 +98,54 @@ const validatePassword = (password) => {
 };
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
 
+    event.preventDefault();
+   event.stopPropagation();
+
+    const form = event.currentTarget;
+
+    let hasEmptyFields = false;
+
+    const requiredFields = [
+      'firstName', 'lastName', 'address1', 'address2',
+      'city', 'state', 'pin', 'drivingLicence', 'dlIssuedBy',
+      'dlValidThrough', 'passportNumber', 'passportIssuedBy',
+      'passportValidUpto', 'dob', 'phone', 'email'
+    ];
+
+    requiredFields.forEach(fieldName => {
+      if (!user[fieldName]) {
+        hasEmptyFields = true;
+      }
+    });
+  
+//if (form.checkValidity() === false|| !passwordsMatch || passwordError ||hasEmptyFields) 
+    if (form.checkValidity() === false|| !passwordsMatch  ||hasEmptyFields) {
+      // event.preventDefault();
+      // event.stopPropagation();
+      setValidated(true);    
       
-    }
+      console.log("Form submission blocked due to validation errors.");
+    }else{
+
+    
+    
+    setValidated(false);
 
     console.log(user);
-    
-    setValidated(true);
 
     let demo=JSON.stringify(user);
     fetch("http://localhost:8080/customer/addcustomer",
     {method:'POST',
      headers:{'Content-type':'application/json'},
      body: demo})
- .then(r=>r)
+ .then(r=>console.log('Data added successfully:', r));
 
  
- navigate('/LoginComponent/Login')
- event.preventDefault();
+ navigate('/LoginComponent/Login');
+ //event.preventDefault();
   };
+}
 
   return (
     <>
@@ -301,4 +325,3 @@ const validatePassword = (password) => {
     </>
   );
 }
-

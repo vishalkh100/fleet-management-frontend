@@ -17,8 +17,12 @@ export function Footer() {
             <ul className="list-unstyled">
               <li><a href="#">Home</a></li>
               <li><a href="#">Products</a></li>
-              <li><a href="#">Services</a></li>
               <li><a href="#">Contact</a></li>
+              <li><a href="/Career/">Career</a></li>
+              <li><a href="/Service/">Services</a></li>
+              <li><a href="https://www.trivago.in/">Affiliated Hotels</a></li>
+              <li><a href="https://www.tomorrow.io/weather/">Weather</a></li>
+              <li><a href="https://www.google.com/maps/@19.1159397,72.8383585,15z?entry=ttu">Site Map</a></li>
             </ul>
 
           </Col>
