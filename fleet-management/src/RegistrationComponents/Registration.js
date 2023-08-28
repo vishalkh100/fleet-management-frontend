@@ -13,7 +13,7 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/;
 export function Registration() 
 {
 
-  const currentDate = new Date().toISOString().split('T')[0]; // Get the current date in the format "YYYY-MM-DD";
+ // const currentDate = new Date().toISOString().split('T')[0]; // Get the current date in the format "YYYY-MM-DD";
 
   let navigate=useNavigate();
 
@@ -247,7 +247,7 @@ const validatePassword = (password) => {
      <Row className="mb-3 justify-content-center">
         <Form.Group as={Col} md="4" controlId="validationCustom05">
              <Form.Label>Date of Birth</Form.Label>
-             <Form.Control type="date" min={currentDate} placeholder="Date of Birth" required name="dob" onChange={handleChange} />
+             <Form.Control type="date"  placeholder="Date of Birth" required name="dob" onChange={handleChange} />
        </Form.Group>
       
       <Form.Group as={Col} md="4" controlId="validationCustom05">

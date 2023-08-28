@@ -58,15 +58,15 @@ export default function MakeResevation() {
 
 
 
-  useEffect(() => {
-    console.log("bookinginfo rentalDate:", bookingInfo.rentalDate,bookingInfo.returnDate,bookingInfo.selectedHubId,bookingInfo.selectedReturnHubId);
-  }, [bookingInfo]);
+  // useEffect(() => {
+  //   console.log("bookinginfo rentalDate:", bookingInfo.rentalDate,bookingInfo.returnDate,bookingInfo.selectedHubId,bookingInfo.selectedReturnHubId);
+  // }, [bookingInfo]);
 
  
 
   // Fetch data from the server on component mount
   useEffect(() => {
-    // Fetch city options from the server
+    //Fetch city options from the server
     fetch("http://localhost:8080/city/getAllCity")
       .then((response) => response.json())
       .then((data) => {
@@ -91,6 +91,8 @@ export default function MakeResevation() {
       .then((response) => response.json())
       .then((data) => {
         setAirportOptions(data);
+        setAirportReturnOptions(data);
+
       })
       .catch((error) => {
         console.error("Error fetching Airport options:", error);
@@ -98,14 +100,14 @@ export default function MakeResevation() {
   }, []);
 
    // Fetch Return  Airport options from the server
-   fetch("http://localhost:8080/airport/getAllAirportHub")
-   .then((response) => response.json())
-   .then((data) => {
-     setAirportReturnOptions(data);
-   })
-   .catch((error) => {
-     console.error("Error fetching Airport options:", error);
-   });
+  //  fetch("http://localhost:8080/airport/getAllAirportHub")
+  //  .then((response) => response.json())
+  //  .then((data) => {
+  //    setAirportReturnOptions(data);
+  //  })
+  //  .catch((error) => {
+  //    console.error("Error fetching Airport options:", error);
+  //  });
 
 
   //console.log(bookingInfo);
