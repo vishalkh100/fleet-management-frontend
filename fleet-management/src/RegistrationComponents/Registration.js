@@ -135,11 +135,18 @@ const validatePassword = (password) => {
     console.log(user);
 
     let demo=JSON.stringify(user);
+
     fetch("http://localhost:8080/customer/addcustomer",
     {method:'POST',
      headers:{'Content-type':'application/json'},
      body: demo})
- .then(r=>console.log('Data added successfully:', r));
+ .then(r=>console.log('Data added successfully in customer master:', r));
+
+//  fetch("http://localhost:8080/register/",
+//  {method:'POST',
+//   headers:{'Content-type':'application/json'},
+//   body: demo})
+// .then(r=>console.log('Data added successfully in registration:', r));
 
  
  navigate('/LoginComponent/Login');

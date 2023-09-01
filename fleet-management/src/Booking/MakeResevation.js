@@ -3,27 +3,55 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import {Link,Outlet} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './MakeReservation.css';
 
 
 export default function MakeResevation() {
   // Define CSS styles
+
   const containerStyle = {
     textAlign: 'center',
     border: '1px solid #000',
-    // padding: '10px',
-    // height: '1800px',
-    // width: '1500px',
-    // marginLeft: '50px',
-    // marginTop: '50px'
+   // padding: '10px',
+    //height: '1800px',
+    height: 'auto',
+   // width: '1400px',
+   width:'auto',
+    //marginLeft: '50px',
+    marginTop: '50px',
+    border: '1px solid #000',
+   background: `url('/Images/himg4.jpg')`,
+   backgroundSize: 'cover'
+   
+    
   };
+
+  // const containerStyle = {
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   alignItems: 'left',
+  //   justifyContent: 'center',
+  //   height: '100vh', // Adjust this value if needed
+  //   //border: '1px solid #000',
+  //   backgroundColor: '#f0f0f0',
+  //   // ... other styles
+  //   background: `url('/Images/himg4.jpg'),
+  //                url('/Images/himg4.jpg')`, 
+  //                backgroundSize: 'cover'
+  // };
 
   const rowStyle = {
     display: 'flex',
     alignItems: 'center',
   };
 
+  // const columnStyle = {
+  //   margin: '10px',
+  // };
+
   const columnStyle = {
-    margin: '10px',
+    margin: '30px 30px', // Added margin to the sides
   };
 
   // Define state variables
@@ -52,15 +80,17 @@ export default function MakeResevation() {
   const [bookingInfo, setBookingInfo] = useState({
     rentalDate: null,
     returnDate: null,
-    selectedHubId: null,
-    selectedReturnHubId: null,
+    checkHUb: null,
+    checkreturnhub: null,
   });
+  const[checkhub,setCheckHub]=useState(0);
+  const[checkreturnhub,setCheckReturnHub]=useState(0);
 
 
 
-  // useEffect(() => {
-  //   console.log("bookinginfo rentalDate:", bookingInfo.rentalDate,bookingInfo.returnDate,bookingInfo.selectedHubId,bookingInfo.selectedReturnHubId);
-  // }, [bookingInfo]);
+  useEffect(() => {
+    console.log("bookinginfo values", bookingInfo.rentalDate,bookingInfo.returnDate,bookingInfo.setCheckHub,bookingInfo.setCheckReturnHub);
+  }, [bookingInfo]);
 
  
 
@@ -232,13 +262,24 @@ const handleSearch1 = () => {
 
   const today = new Date();
 
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    // Navigate to the desired component with bookingInfo prop
+    navigate('/VehicalSelection', { state: { bookingInfo } });
+  };
+
+ 
  
   return (
+
+    
     <div style={containerStyle}>
     
       <h3 style={{ textAlign: 'left', paddingLeft: '50px' }}>
-        <u>
-          <a href='https://www.google.co.in/'>Make Reservation</a></u>
+        {/* <u>
+          <a href='https://www.google.co.in/'>Make Reservation</a></u> */}
+          <h3 align="center">Make Reservation</h3>
       </h3>
       <h5 style={{ textAlign: 'left', paddingLeft: '50px' }}>
         <u>Rental Date And Time</u>
@@ -260,6 +301,7 @@ const handleSearch1 = () => {
             dateFormat="MM/dd/yyyy"
             minDate={today} // Set minimum date to today
             name="rentaldate"
+            style={{ width: '160px' }}
           />
         </div>
         <div style={columnStyle}>
@@ -287,6 +329,7 @@ const handleSearch1 = () => {
             type="time"
             value={rentalTime}
             onChange={(e) => setRentalTime(e.target.value)}
+            style={{ width: '80px' }}
           />
         </div>
         <div style={columnStyle}>
@@ -351,7 +394,11 @@ const handleSearch1 = () => {
 
           {/* State Dropdown */}
 
+          
+
         <h3 style={{ textAlign: 'left', paddingLeft: '50px' }}>OR</h3>
+
+        
         <h4 style={{ textAlign: 'left', paddingLeft: '50px' }}>
           State
           <select
@@ -406,8 +453,8 @@ const handleSearch1 = () => {
 
 
        {/* Display selected hub details */}
-       {selectedHub && (
-        <div>
+       {/* {selectedHub && (
+        <div> */}
           {/* <h4>Selected Hub Details:</h4> */}
           {/* <p>Hub ID: {selectedHub.hub_id}</p>
           <p>Closing Time: {selectedHub.closing_time}</p>
@@ -444,15 +491,17 @@ const handleSearch1 = () => {
   <div className="hub-options">
     {/* <h4>Selected Hub Details:</h4> */}
     {selectedHub.map((hub) => (
-      <label key={hub.hub_id} className="hub-option">
+      <label key={hub.hubId} className="hub-option">
         <input
           type="radio"
           name="hub"
-          value={hub.hub_id}
+          value={hub.hubId}
           onChange={() => {
-            setSelectedHub(hub.hub_id); // Update the selected hub ID
-            setBookingInfo(prevInfo => ({ ...prevInfo, selectedHubId: hub.hub_id }));
-            console.log("Selected Hub ID:", hub.hub_id);
+            console.log("check"+hub.hubId);
+           // setSelectedHub(hub.hubId); // Update the selected hub ID
+           setCheckHub(hub.hubId);
+            setBookingInfo(prevInfo => ({ ...prevInfo, setCheckHub: hub.hubId }));
+            console.log("Selected Hub ID:", checkhub);
           }}
           // Set any other necessary attributes for the radio button
           
@@ -468,8 +517,8 @@ const handleSearch1 = () => {
 )}
 
 
-        </div>
-      )}
+        {/* </div>
+      )} */}
 
 
 
@@ -588,27 +637,33 @@ const handleSearch1 = () => {
 
 {/* // Display selected return hub details */}
 {selectedReturnHub && (
-  <div>
-    <h4>Selected Return Hub Details:</h4>
+  <div className="hub-options">
+    {/* <h4>Selected Hub Details:</h4> */}
     {selectedReturnHub.map((hub) => (
-      <label key={hub.hub_id} className="hub-option">
+      <label key={hub.hubId} className="hub-option">
         <input
           type="radio"
-          name="returnHub"
-          value={hub.hub_id}
+          name="hub"
+          value={hub.hubId}
+          onChange={() => {
+            console.log("check"+hub.hubId);
+           // setSelectedHub(hub.hubId); // Update the selected hub ID
+           setCheckReturnHub(hub.hubId);
+            setBookingInfo(prevInfo => ({ ...prevInfo,  setCheckReturnHub: hub.hubId }));
+            console.log("Selected Return Hub ID:", checkreturnhub);
+          }}
+          // Set any other necessary attributes for the radio button
+          
         />
         <div className="hub-details">
           <p><strong>Name:</strong> {hub.hubName}</p>
           <p><strong>Opening Time:</strong> {hub.openingTime}</p>
-          {/* You can display other return hub details as well */}
+          {/* You can display other hub details as well */}
         </div>
       </label>
     ))}
   </div>
 )}
-
-
-
 
 
 {/* continue booking div tag style={{ position: 'absolute', width: '100%', textAlign: 'left', marginBottom: '20px' }} */}
@@ -624,13 +679,16 @@ const handleSearch1 = () => {
       </div> */}
 
 {/* , border: '1px solid #000' */}
-      <div style={{ position: 'absolute', top: '120px', right: '150px', padding: '10px', width: '300px', height: '300px', marginTop: '20px', marginRight: '20px' }}>
+      {/* <div style={{ position: 'absolute', top: '120px', right: '150px', padding: '10px', width: '300px', height: '300px', marginTop: '20px', marginRight: '20px' }}> */}
   {/* <h5 style={{ textAlign: 'center' }}>Another Box</h5> */}
-  <img src="/Images/droom.jpg" alt="human" style={{ width: '150%', height: 'auto' }} />
-</div>
-<Link to="/VehicalSelection">Continue Booking</Link>
-<Outlet/>
+  {/* <img src="/Images/droom.jpg" alt="human" style={{ width: '150%', height: 'auto' }} />
+</div> */}
+{/* <Link to="/VehicalSelection">Continue Booking</Link> */}
 
-    </div>
+{/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}> */}
+<button onClick={handleSubmit}  >Submit</button>
+
+</div>
+    
   );
 }

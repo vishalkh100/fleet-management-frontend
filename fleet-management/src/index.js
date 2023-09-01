@@ -17,6 +17,7 @@ import ConfirmBooking from './Booking/ConfirmBooking';
 import CustomerCare from './CustomerCare';
 import Career from './Career';
 import ServicePage from './ServicePage';
+import { AfterLogin } from './LoginComponent/AfterLogin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -40,6 +41,8 @@ root.render(
         <Route path="CustomerInformation" element={<CustomerInformation/>}/>
         <Route path="ConfirmBooking" element={<ConfirmBooking/>}/>
         <Route path="/Service/" element={<ServicePage/>}/>
+
+        <Route path="/AfterLogin" element={<AfterLogin/>}/>
 
         </Route>
       </Routes>

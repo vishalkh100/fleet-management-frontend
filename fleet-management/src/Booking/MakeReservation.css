@@ -1,0 +1,89 @@
+/* MakeReservation.css */
+
+
+  
+   /* .row {
+    display: flex;
+    align-items: center;
+    /* Add more styles as needed 
+  } */
+  
+  /* .column {
+    margin: 10px;
+    /* Add more styles as needed 
+  } */
+  
+  /* Style for the checkboxes */
+  /* .checkbox-container {
+    text-align: left;
+    padding-left: 50px;
+    margin-top: 10px;
+  } */
+  
+  /* Style for the search button */
+  /* .search-button {
+    margin-left: 20px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+   */
+  /* Style for the return location section */
+  /* .return-location {
+    text-align: left;
+    padding-left: 50px;
+    padding-top: 50px;
+  }
+   */
+  /* Style for the "OR" header */
+  /* .or-header {
+    text-align: left;
+    padding-left: 50px;
+    margin-top: 10px;
+  } */
+  
+  /* Style for the submit button */
+  /* .submit-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  } */
+  
+  /* Style for images */
+  /* .image-container {
+    position: absolute;
+    top: 120px;
+    right: 150px;
+    padding: 10px;
+    width: 300px;
+    height: 300px;
+    margin-top: 20px;
+    margin-right: 20px;
+  } */
+
+  /* .react-datepicker-wrapper {
+    display: inline-block;
+  } */
+
+  .heading {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #2e0b0b;
+    text-decoration: none; /* Change the text decoration */
+ 
+    background-color: #f2f2f2;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold; /* Make the text bold */
+    font-style: italic; /* Add italic font style */
+  }
+
+  
+  /* Add more custom styles as needed */
+  

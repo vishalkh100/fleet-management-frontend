@@ -1,10 +1,52 @@
 import React, { useState, useEffect } from "react";
-import { Link,Outlet } from "react-router-dom";
+import { Link,Outlet, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-export default function RentalAddOn(props) {
+export default function RentalAddOn() {
+
+  const containerStyle = {
+    textAlign: 'center',
+    border: '1px solid #000',
+   // padding: '10px',
+    //height: '1800px',
+    height: 'auto',
+   // width: '1400px',
+   width:'auto',
+    //marginLeft: '50px',
+    marginTop: '50px',
+    border: '1px solid #000',
+   background: `url('/Images/himg.jpg')`,
+   backgroundSize: 'cover'
+   
+    
+  };
+
   const [addons, setAddons] = useState([]);
-  const [selectedAddons, setSelectedAddons] = useState({});
+  const [selectedAddons, setSelectedAddons] = useState([]);
   const [seatRadio, setSeatRadio] = useState(null);
+
+
+  const location = useLocation();
+  const bookingInfo = location.state && location.state.user;
+
+  console.log("hi"+ bookingInfo.rentalDate);
+
+  const [user,setUser]=useState({
+    rentalDate:  null,
+    returnDate: null ,
+    setCheckHub: null,
+    setCheckReturnHub: null ,
+    selectedCarTypeId: null,
+    selectedAddOns:[]
+  });
+
+  
+
+  useEffect(() => {
+    console.log("user values in addon", user.rentalDate,user.returnDate,user.setCheckHub,user.setCheckReturnHub,user.selectedCarTypeId,user.selectedAddOns);
+  }, [user]);
+
+
 
   useEffect(() => {
     fetch("http://localhost:8080/addon")
@@ -17,16 +59,61 @@ export default function RentalAddOn(props) {
       });
   }, []);
 
+  
+
   const handleCheckboxChange = (event) => {
     const addonId = event.target.id;
+    const isChecked = event.target.checked;
+    console.log("in handlecheck"+addonId)
     setSelectedAddons((prevSelectedAddons) => ({
       ...prevSelectedAddons,
       [addonId]: {
-        selected: event.target.checked,
-        numberOfChildSeats: 1, // Default value
+        selected: isChecked,
+        numberOfChildSeats: isChecked? 1:0, // Default value
       },
+
+      
     }));
   };
+
+
+  // setUser((prevUser) => ({
+  //   ...prevUser,
+  //   selectedAddOns: Object.keys(selectedAddons)
+  //     .filter((addonId) => selectedAddons[addonId].selected)
+  //     .map((addonId) => ({
+  //       addonId,
+  //       numberOfChildSeats: selectedAddons[addonId].numberOfChildSeats,
+  //     })),
+  // }));
+
+  useEffect(() => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      selectedAddOns: Object.keys(selectedAddons)
+        .filter((addonId) => selectedAddons[addonId].selected)
+        .map((addonId) => ({
+          addonId,
+          numberOfChildSeats: selectedAddons[addonId].numberOfChildSeats,
+        })),      
+  rentalDate: bookingInfo.rentalDate ,
+  returnDate: bookingInfo.returnDate ,
+  setCheckHub: bookingInfo.setCheckHub ,
+  setCheckReturnHub: bookingInfo.setCheckReturnHub ,
+  selectedCarTypeId:bookingInfo.selectedCarTypeId
+
+    }));
+  }, [selectedAddons]);
+
+  console.log("selected addon :"+selectedAddons);
+
+
+  // rentalDate: bookingInfo.rentalDate ,
+  //     returnDate: bookingInfo.returnDate ,
+  //     setCheckHub: bookingInfo.setCheckHub ,
+  //     setCheckReturnHub: bookingInfo.setCheckReturnHub ,
+
+
 
   const handleChildSeatChange = (event, addonId, value) => {
     setSelectedAddons((prevSelectedAddons) => ({
@@ -35,22 +122,32 @@ export default function RentalAddOn(props) {
         ...prevSelectedAddons[addonId],
         numberOfChildSeats: value,
       },
+ 
     }));
 
     setSeatRadio(value);
   };
 
+  const navigate=useNavigate();
+  const handleSubmit = () => {
+    // Navigate to the desired component with bookingInfo prop
+    navigate('/BlankCustomerInfo', { state: { user } });
+  };
+
   return (
-    <div>
-      <h2>Rental Add-ons</h2>
-      <table>
+    <div style={containerStyle}>
+      <h2 style={{ color: 'green',fontWeight: 'bold' }}>Rental Add-ons</h2>
+      
+      <table align="center" border="3"cellPadding="4" cellSpacing="1" style={{margin: 'auto'}} >
         <thead>
+       
           <tr>
             <th></th>
-            <th>addOnName</th>
-            <th>addOnRate</th>
+            <th >AddOnName</th>
+            <th>AddOnRate</th>
           </tr>
         </thead>
+       
         <tbody>
           {addons.map((add) => (
             <tr key={add.addOnId}>
@@ -71,9 +168,10 @@ export default function RentalAddOn(props) {
                 </label>
               </td>
               <td>
-                {selectedAddons[add.addOnId]?.selected && add.addOnName === "Child Seat" && (
+                {selectedAddons[add.addOnId]?.selected && add.addOnName === "Child Car Seat" && (
                   <label>
-                    Please select the number of seats:
+                    <br></br>
+                   <h4> Please select the number of seats:</h4>
                     <div>
                       <label>
                         <input
@@ -105,7 +203,7 @@ export default function RentalAddOn(props) {
       </table>
 
       <div>
-        <h3>Selected Add-on Details</h3>
+        <h5>Selected Add-on Details</h5>
         <p>Seats: {seatRadio}</p>
         <ul>
           {Object.entries(selectedAddons).map(([addonId, addonData]) => (
@@ -120,7 +218,9 @@ export default function RentalAddOn(props) {
           ))}
         </ul>
       </div>
-      <button style={{ marginRight: "50px" }}><Link to="/BlankCustomerInfo">Continue Booking</Link></button>
+      {/* <button style={{ marginRight: "50px" }}><Link to="/BlankCustomerInfo">Continue Booking</Link></button> */}
+
+      <button onClick={handleSubmit}>Submit</button>
       <Outlet/>
     </div>
   );

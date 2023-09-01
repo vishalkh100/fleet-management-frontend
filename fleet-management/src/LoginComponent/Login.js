@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -12,6 +12,8 @@ function Login() {
   const [passwordError, setPasswordError] = useState('');
   const [userData, setUserData] = useState(null); // Initialize userData state
   const[loginUser,setLoginUser]=useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // This effect will run whenever userData changes
@@ -55,6 +57,8 @@ function Login() {
       // Clear form fields
       setEmail('');
       setPassword('');
+
+      navigate('/AfterLogin');
     }
   };
 
