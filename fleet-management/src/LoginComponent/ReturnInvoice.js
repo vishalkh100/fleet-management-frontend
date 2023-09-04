@@ -12,6 +12,7 @@ export function ReturnInvoice() {
     const [customdetail, setCustomerDetail] = useState([]);
     const [oldCustomDetail, setOldCustomDetail] = useState(null); 
     const [newCustomDetail, setNewCustomDetail] = useState(null);
+    const [invoice,setInvoice]=useState(null);
 
     const fetchOldCustomerDetails = async () => {
         try {
@@ -23,6 +24,25 @@ export function ReturnInvoice() {
           setOldCustomDetail(null);
         }
       };
+
+      const generateInvoice=async()=>
+      {
+        try {
+          const response = await fetch("http://localhost:8080/invoice/getInvoice/4");
+          const data = await response.json();
+          setInvoice(data);
+        } catch (error) {
+          console.error("Error fetching invoice details:", error);
+          setInvoice(null);
+        }
+
+      };
+
+      const printLogic=()=>{
+        window.print();
+      }
+
+      console.log("invoice"+invoice);
 
       const handleBookingIdSubmit = (event) => {
         event.preventDefault();
@@ -175,8 +195,40 @@ export function ReturnInvoice() {
   </div>
 )}
 
+{/* Display the invoice details as a receipt */}
+{invoice && (
+  <div className="receipt">
+    <div className="receipt-header">
+      <h2>Receipt</h2>
+    </div>
+    <div className="receipt-details">
+      <p><strong>Invoice ID:</strong><br></br> {invoice.invoiceId}</p>
+      <p><strong>Customer Details:</strong> <br></br>{invoice.customerDetails}</p>
+      <p><strong>Handover Date:</strong> <br></br>{invoice.handoverDate}</p>
+      <p><strong>Invoice Date:</strong> <br></br>{invoice.invoiceDate}</p>
+      <p><strong>Invoice Rate:</strong> <br></br>{invoice.invoiceRate}</p>
+      <p><strong>Rental Amount:</strong><br></br> {invoice.rentalAmt}</p>
+      <p><strong>Return Date:</strong><br></br> {invoice.returnDate}</p>
+      <p><strong>Total Add-On Amount:</strong><br></br> {invoice.totalAddonAmt}</p>
+      {/* Highlight the Total Amount */}
+      <p>
+        <strong>Total Amount:</strong>
+        <span style={{ color: 'red', fontWeight: 'bold' }}><br></br>{invoice.totalAmt}</span>
+      </p>
+      <p><strong>Booking ID:</strong> <br></br>{invoice.bookingId.bookingId}</p>
+    </div>
+    <div className="receipt-footer">
+      <p><h3>Thank you for choosing our services!</h3></p>
+    </div>
+  </div>
+)}
+
+
 
 <button onClick={handleReturnClick}>Process Return</button>
+<button onClick={generateInvoice}>Generate Invoice</button>
+<button onClick={printLogic}>Print</button>
+
 
 
 
@@ -309,6 +361,7 @@ function ReturnPopup({ vehicleRegNo, setVehicleRegNo, onDone }) {
           </label>
           <br />
           <button onClick={handleDoneClick}>Done</button>
+
         </div>
       </div>
     );
