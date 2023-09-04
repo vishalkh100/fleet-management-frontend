@@ -94,7 +94,7 @@ export default function VehicalSelection(){
 {/* <img src="CarType/FirstCar.jpg" alt="car"/> */}
 <div style={{ backgroundColor: "white", padding: "20px" }}></div>
 
-            <table align="center">
+            <table align="center" id="car">
             <thead>
                 <tr >
                     <th  id = "c1" className="colm-header">CAR CLASS</th>

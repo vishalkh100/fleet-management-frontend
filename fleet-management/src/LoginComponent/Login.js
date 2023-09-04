@@ -63,13 +63,17 @@ function Login() {
   };
 
   return (
+  <div id="log1">
 <>
 <br></br>
-<h3>Login Here</h3>
+<div id="email">
+<div style={{ backgroundColor: 'mintcream', padding: '20px', textAlign: 'center', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}>
+      <h3 style={{ color: 'purple', fontSize: '32px', textTransform: 'uppercase' }}>Login Here</h3>
+    </div>
 
-    <div className="Login_form"> {/* Wrap the form in a centered container */}
-      <Form onSubmit={handleSubmit}>
-        <Form.Group as={Row} className="mb-2" controlId="formHorizontalEmail">
+<div className="Login_form" > {/* Wrap the form in a centered container */}
+      <Form onSubmit={handleSubmit} style={{ border: '3px solid #7d57c0', padding: '20px' }}>
+        <Form.Group as={Row} className="mb-2" controlId="formHorizontalEmail" >
           <Form.Label id="r" column sm={3}> Email</Form.Label>
           <Col sm={{ span: 10, offset:0.8 }}>
             <Form.Control
@@ -113,12 +117,14 @@ function Login() {
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 5, offset: 0.5 }}>
-            <Button type="submit">Sign in</Button>
+            <Button type="submit" style={{ border: '2px solid #3498db', background: '#3498db', color: '#fff' }}>Sign in</Button>
           </Col>
         </Form.Group>
       </Form>
     </div>
+    </div>
     </>
+    </div>
   );
 }
 

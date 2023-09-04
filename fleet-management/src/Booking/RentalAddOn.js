@@ -135,6 +135,7 @@ export default function RentalAddOn() {
   };
 
   return (
+    <div id="add">
     <div style={containerStyle}>
       <h2 style={{ color: 'green',fontWeight: 'bold' }}>Rental Add-ons</h2>
       
@@ -222,6 +223,7 @@ export default function RentalAddOn() {
 
       <button onClick={handleSubmit}>Submit</button>
       <Outlet/>
+    </div>
     </div>
   );
 }

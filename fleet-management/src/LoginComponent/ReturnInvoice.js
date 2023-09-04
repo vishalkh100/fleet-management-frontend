@@ -28,7 +28,7 @@ export function ReturnInvoice() {
       const generateInvoice=async()=>
       {
         try {
-          const response = await fetch("http://localhost:8080/invoice/getInvoice/4");
+          const response = await fetch("http://localhost:8080/invoice/getInvoice/2");
           const data = await response.json();
           setInvoice(data);
         } catch (error) {

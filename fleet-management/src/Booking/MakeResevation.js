@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import {Link,Outlet} from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './MakeReservation.css';
 
@@ -12,19 +12,17 @@ export default function MakeResevation() {
 
   const containerStyle = {
     textAlign: 'center',
-    border: '1px solid #000',
-   // padding: '10px',
+    // padding: '10px',
     //height: '1800px',
     height: 'auto',
-   // width: '1400px',
-   width:'auto',
+    // width: '1400px',
+    width: 'auto',
     //marginLeft: '50px',
     marginTop: '50px',
-    border: '1px solid #000',
-   background: `url('/Images/himg4.jpg')`,
-   backgroundSize: 'cover'
-   
-    
+    // background: `url('/Images/himg4.jpg')`,
+    backgroundSize: 'cover'
+
+
   };
 
   // const containerStyle = {
@@ -75,7 +73,7 @@ export default function MakeResevation() {
   const [selectedCityObj, setSelectedCityObj] = useState(null);
   const [selectedReturnHub, setSelectedReturnHub] = useState(null);
   const [selectedAirportDetails, setSelectedAirportDetails] = useState(null);
-  const[selectedReturnAirportDetails, setSelectedReturnAirportDetails]=useState(null);
+  const [selectedReturnAirportDetails, setSelectedReturnAirportDetails] = useState(null);
   const [bookingStarted, setBookingStarted] = useState(false);
   const [bookingInfo, setBookingInfo] = useState({
     rentalDate: null,
@@ -83,16 +81,16 @@ export default function MakeResevation() {
     checkHUb: null,
     checkreturnhub: null,
   });
-  const[checkhub,setCheckHub]=useState(0);
-  const[checkreturnhub,setCheckReturnHub]=useState(0);
+  const [checkhub, setCheckHub] = useState(0);
+  const [checkreturnhub, setCheckReturnHub] = useState(0);
 
 
 
   useEffect(() => {
-    console.log("bookinginfo values", bookingInfo.rentalDate,bookingInfo.returnDate,bookingInfo.setCheckHub,bookingInfo.setCheckReturnHub);
+    console.log("bookinginfo values", bookingInfo.rentalDate, bookingInfo.returnDate, bookingInfo.setCheckHub, bookingInfo.setCheckReturnHub);
   }, [bookingInfo]);
 
- 
+
 
   // Fetch data from the server on component mount
   useEffect(() => {
@@ -129,7 +127,7 @@ export default function MakeResevation() {
       });
   }, []);
 
-   // Fetch Return  Airport options from the server
+  // Fetch Return  Airport options from the server
   //  fetch("http://localhost:8080/airport/getAllAirportHub")
   //  .then((response) => response.json())
   //  .then((data) => {
@@ -149,10 +147,10 @@ export default function MakeResevation() {
       fetch(`http://localhost:8080/hub/getHubByCityId/${cityId}`)
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched hub details:", data);
+          console.log("Fetched hub details:", data);
           setSelectedHub(data);
           // Update the bookingInfo state with the selected hub ID
-       
+
         })
         .catch(error => {
           console.error("Error fetching hub details:", error);
@@ -160,8 +158,8 @@ export default function MakeResevation() {
     }
   };
 
-// Function to fetch hub details by city id for return location
-const fetchHubDetailsByReturnCityId = (cityId) => {
+  // Function to fetch hub details by city id for return location
+  const fetchHubDetailsByReturnCityId = (cityId) => {
     console.log("Fetching hub details for return city ID:", cityId);
     if (cityId) {
       fetch(`http://localhost:8080/hub/getHubByCityId/${cityId}`)
@@ -169,7 +167,7 @@ const fetchHubDetailsByReturnCityId = (cityId) => {
         .then(data => {
           console.log("Fetched return hub details:", data);
           setSelectedReturnHub(data);
-       
+
         })
         .catch(error => {
           console.error("Error fetching return hub details:", error);
@@ -203,10 +201,10 @@ const fetchHubDetailsByReturnCityId = (cityId) => {
       fetch(`http://localhost:8080/airport/getAirportById/${airportId}`)
         .then(response => response.json())
         .then(data => {
-          
+
           setSelectedReturnAirportDetails(data);
 
-          console.log("in fetch"+selectedReturnAirportDetails);
+          console.log("in fetch" + selectedReturnAirportDetails);
         })
         .catch(error => {
           console.error("Error fetching airport details:", error);
@@ -216,7 +214,7 @@ const fetchHubDetailsByReturnCityId = (cityId) => {
     }
   };
 
-  
+
 
 
 
@@ -232,8 +230,8 @@ const fetchHubDetailsByReturnCityId = (cityId) => {
     }
   };
 
- // Handle the search button click for return city
-const handleSearch1 = () => {
+  // Handle the search button click for return city
+  const handleSearch1 = () => {
     console.log(`Searching for Return City: ${returnCity}, Return State: ${returnState}`);
     if (returnCity) {
       // Find the selected return city object from cityOptions
@@ -247,7 +245,7 @@ const handleSearch1 = () => {
       console.log("Return City is not selected");
     }
   };
-  
+
 
   // Handle the checkbox change
   const handleCheckboxChange = () => {
@@ -269,18 +267,19 @@ const handleSearch1 = () => {
     navigate('/VehicalSelection', { state: { bookingInfo } });
   };
 
- 
- 
+
+
   return (
 
-    
-    <div style={containerStyle}>
-    
+
+    <div style={containerStyle} id="start2">
+
       <h3 style={{ textAlign: 'left', paddingLeft: '50px' }}>
         {/* <u>
           <a href='https://www.google.co.in/'>Make Reservation</a></u> */}
-          <h3 align="center">Make Reservation</h3>
+        <h2 align="center" id="start-booking">Make Reservation</h2>
       </h3>
+      <div id="start1">
       <h5 style={{ textAlign: 'left', paddingLeft: '50px' }}>
         <u>Rental Date And Time</u>
         <span style={{ marginRight: '100px' }}></span>
@@ -292,11 +291,11 @@ const handleSearch1 = () => {
           <DatePicker
             placeholderText='Select Booking Date'
             selected={rentalDate}
-            onChange={(date) =>  {
-                setRentalDate(date);
-                // Update the bookingInfo state with the selected rental date
-                setBookingInfo(prevInfo => ({ ...prevInfo, rentalDate: date }));
-                console.log("bookinginfo"+bookingInfo.rentalDate)
+            onChange={(date) => {
+              setRentalDate(date);
+              // Update the bookingInfo state with the selected rental date
+              setBookingInfo(prevInfo => ({ ...prevInfo, rentalDate: date }));
+              console.log("bookinginfo" + bookingInfo.rentalDate)
             }}
             dateFormat="MM/dd/yyyy"
             minDate={today} // Set minimum date to today
@@ -310,15 +309,15 @@ const handleSearch1 = () => {
             placeholderText='Select Return Date'
             selected={returnDate}
             onChange={(date) => {
-                setReturnDate(date);
-                console.log("return date"+date);
-                // Update the bookingInfo state with the selected return date
-                setBookingInfo(prevInfo => ({ ...prevInfo, returnDate: date }));
-                console.log("booking info"+bookingInfo.returnDate);
+              setReturnDate(date);
+              console.log("return date" + date);
+              // Update the bookingInfo state with the selected return date
+              setBookingInfo(prevInfo => ({ ...prevInfo, returnDate: date }));
+              console.log("booking info" + bookingInfo.returnDate);
             }}
             dateFormat="MM/dd/yyyy"
             minDate={today} // Set minimum date to today
-            //name="returndate"
+          //name="returndate"
           />
         </div>
       </div>
@@ -357,18 +356,18 @@ const handleSearch1 = () => {
             value={airport}
             style={{ width: '120px', marginLeft: '20px', fontSize: '12px' }}
             onChange={(e) => {
-                setAirport(e.target.value);
-                // Find the selected airport object from airportOptions
-                const selectedAirport = airportOptions.find(option => option.airportName === e.target.value);
-                console.log(selectedAirport);
-                console.log(selectedAirport.airporId);
-                if (selectedAirport) {
-                  fetchAirportDetailsById(selectedAirport.airporId); // Fetch airport details by ID
-                } else {
-                  console.log("Selected Airport object not found");
-                  setSelectedAirportDetails(null); // Clear selected airport details
-                }
-              }}
+              setAirport(e.target.value);
+              // Find the selected airport object from airportOptions
+              const selectedAirport = airportOptions.find(option => option.airportName === e.target.value);
+              console.log(selectedAirport);
+              console.log(selectedAirport.airporId);
+              if (selectedAirport) {
+                fetchAirportDetailsById(selectedAirport.airporId); // Fetch airport details by ID
+              } else {
+                console.log("Selected Airport object not found");
+                setSelectedAirportDetails(null); // Clear selected airport details
+              }
+            }}
           >
             <option value="">Select an Airport</option>
             {airportOptions.map((option) => (
@@ -381,24 +380,24 @@ const handleSearch1 = () => {
 
 
         {/* Display selected airport details */}
-{selectedAirportDetails && (
-  <div>
-    <h4>Selected Airport Details:</h4>
-    <p>Airport ID: {selectedAirportDetails.airporId}</p>
-    <p>Airport Name: {selectedAirportDetails.airportName}</p>
-    <p>State: {selectedAirportDetails.stateId.stateName}</p>
-    {/* Display other airport details here */}
-  </div>
-)}
+        {selectedAirportDetails && (
+          <div>
+            <h4>Selected Airport Details:</h4>
+            <p>Airport ID: {selectedAirportDetails.airporId}</p>
+            <p>Airport Name: {selectedAirportDetails.airportName}</p>
+            <p>State: {selectedAirportDetails.stateId.stateName}</p>
+            {/* Display other airport details here */}
+          </div>
+        )}
 
 
-          {/* State Dropdown */}
+        {/* State Dropdown */}
 
-          
+
 
         <h3 style={{ textAlign: 'left', paddingLeft: '50px' }}>OR</h3>
 
-        
+
         <h4 style={{ textAlign: 'left', paddingLeft: '50px' }}>
           State
           <select
@@ -425,11 +424,11 @@ const handleSearch1 = () => {
             value={city}
             style={{ width: '100px', marginLeft: '20px', fontSize: '12px' }}
             onChange={(e) => {
-                setCity(e.target.value);
-                // Find the selected city object from cityOptions
-                const selectedCity = cityOptions.find(option => option.cityName === e.target.value);
-                setSelectedCityObj(selectedCity); // Set the selected city object
-              }}
+              setCity(e.target.value);
+              // Find the selected city object from cityOptions
+              const selectedCity = cityOptions.find(option => option.cityName === e.target.value);
+              setSelectedCityObj(selectedCity); // Set the selected city object
+            }}
           >
             <option value="">Select a city</option>
             {cityOptions.map((option) => (
@@ -441,9 +440,9 @@ const handleSearch1 = () => {
           <button onClick={handleSearch} style={{ marginLeft: '20px' }}>Search</button>
         </h4>
       </div>
-      
-       {/* Display selected city details and get cityid through city name */}
-       {/* {selectedCityObj && (
+
+      {/* Display selected city details and get cityid through city name */}
+      {/* {selectedCityObj && (
         <div>
           <h4>Selected City Details:</h4>
           <p>City ID: {selectedCityObj.cityId}</p>
@@ -452,15 +451,15 @@ const handleSearch1 = () => {
       )} */}
 
 
-       {/* Display selected hub details */}
-       {/* {selectedHub && (
+      {/* Display selected hub details */}
+      {/* {selectedHub && (
         <div> */}
-          {/* <h4>Selected Hub Details:</h4> */}
-          {/* <p>Hub ID: {selectedHub.hub_id}</p>
+      {/* <h4>Selected Hub Details:</h4> */}
+      {/* <p>Hub ID: {selectedHub.hub_id}</p>
           <p>Closing Time: {selectedHub.closing_time}</p>
           <p>Hub Address: {selectedHub.hub_address}</p> */}
-          {/* ... (display other hub details) */}
-          {/* <thead>
+      {/* ... (display other hub details) */}
+      {/* <thead>
           <h4>Selected Hub Details:</h4>
             <tr>
                 <th>id</th>
@@ -487,37 +486,37 @@ const handleSearch1 = () => {
 
           </tbody> */}
 
-{selectedHub && (
-  <div className="hub-options">
-    {/* <h4>Selected Hub Details:</h4> */}
-    {selectedHub.map((hub) => (
-      <label key={hub.hubId} className="hub-option">
-        <input
-          type="radio"
-          name="hub"
-          value={hub.hubId}
-          onChange={() => {
-            console.log("check"+hub.hubId);
-           // setSelectedHub(hub.hubId); // Update the selected hub ID
-           setCheckHub(hub.hubId);
-            setBookingInfo(prevInfo => ({ ...prevInfo, setCheckHub: hub.hubId }));
-            console.log("Selected Hub ID:", checkhub);
-          }}
-          // Set any other necessary attributes for the radio button
-          
-        />
-        <div className="hub-details">
-          <p><strong>Name:</strong> {hub.hubName}</p>
-          <p><strong>Opening Time:</strong> {hub.openingTime}</p>
-          {/* You can display other hub details as well */}
+      {selectedHub && (
+        <div className="hub-options">
+          {/* <h4>Selected Hub Details:</h4> */}
+          {selectedHub.map((hub) => (
+            <label key={hub.hubId} className="hub-option">
+              <input
+                type="radio"
+                name="hub"
+                value={hub.hubId}
+                onChange={() => {
+                  console.log("check" + hub.hubId);
+                  // setSelectedHub(hub.hubId); // Update the selected hub ID
+                  setCheckHub(hub.hubId);
+                  setBookingInfo(prevInfo => ({ ...prevInfo, setCheckHub: hub.hubId }));
+                  console.log("Selected Hub ID:", checkhub);
+                }}
+              // Set any other necessary attributes for the radio button
+
+              />
+              <div className="hub-details">
+                <p><strong>Name:</strong> {hub.hubName}</p>
+                <p><strong>Opening Time:</strong> {hub.openingTime}</p>
+                {/* You can display other hub details as well */}
+              </div>
+            </label>
+          ))}
         </div>
-      </label>
-    ))}
-  </div>
-)}
+      )}
 
 
-        {/* </div>
+      {/* </div>
       )} */}
 
 
@@ -537,7 +536,7 @@ const handleSearch1 = () => {
       </div>
 
 
- {/* Return location */}
+      {/* Return location */}
 
       {showReturnLocation && (
         <div>
@@ -547,20 +546,20 @@ const handleSearch1 = () => {
 
 
           {/* Airport Retrun  */}
-          
+
           <h4 style={{ textAlign: 'left', paddingLeft: '50px' }}>
             Airport
             <select
               name="ReturnAirport"
               value={returnAirport}
               style={{ width: '120px', marginLeft: '20px', fontSize: '12px' }}
-              onChange={(e) =>{
+              onChange={(e) => {
                 setReturnAirport(e.target.value);
                 const selectedReturnAirport = airportReturnOptions.find(option => option.airportName === e.target.value);
                 console.log(selectedReturnAirport);
                 if (selectedReturnAirport) {
                   // Fetch return airport details by ID
-                  console.log("**"+selectedReturnAirport.airporId)
+                  console.log("**" + selectedReturnAirport.airporId)
                   fetchAirportReturnDetailsById(selectedReturnAirport.airporId);
                 } else {
                   console.log("Selected Return Airport object not found");
@@ -572,7 +571,7 @@ const handleSearch1 = () => {
 
               console.log("new"+airportReturnOptions);
               {airportReturnOptions.map((option) => (
-             
+
                 <option key={option.airportId} value={option.airportName}>
                   {option.airportName}
                 </option>
@@ -580,16 +579,16 @@ const handleSearch1 = () => {
             </select>
           </h4>
 
-       
+
 
 
           {/* Display selected return airport details */}
-{selectedReturnAirportDetails && (
+          {selectedReturnAirportDetails && (
             <div>
               <h4>Selected Return Airport Details:</h4>
               <p>Airport ID: {selectedReturnAirportDetails.airporId}</p>
-              <p>Airport Name: {selectedReturnAirportDetails.airportName}</p>    
-              <p>Airport Name: {selectedReturnAirportDetails. closingTime}</p>
+              <p>Airport Name: {selectedReturnAirportDetails.airportName}</p>
+              <p>Airport Name: {selectedReturnAirportDetails.closingTime}</p>
               {/* Display other return airport details here */}
             </div>
           )}
@@ -635,38 +634,38 @@ const handleSearch1 = () => {
         </div>
       )}
 
-{/* // Display selected return hub details */}
-{selectedReturnHub && (
-  <div className="hub-options">
-    {/* <h4>Selected Hub Details:</h4> */}
-    {selectedReturnHub.map((hub) => (
-      <label key={hub.hubId} className="hub-option">
-        <input
-          type="radio"
-          name="hub"
-          value={hub.hubId}
-          onChange={() => {
-            console.log("check"+hub.hubId);
-           // setSelectedHub(hub.hubId); // Update the selected hub ID
-           setCheckReturnHub(hub.hubId);
-            setBookingInfo(prevInfo => ({ ...prevInfo,  setCheckReturnHub: hub.hubId }));
-            console.log("Selected Return Hub ID:", checkreturnhub);
-          }}
-          // Set any other necessary attributes for the radio button
-          
-        />
-        <div className="hub-details">
-          <p><strong>Name:</strong> {hub.hubName}</p>
-          <p><strong>Opening Time:</strong> {hub.openingTime}</p>
-          {/* You can display other hub details as well */}
+      {/* // Display selected return hub details */}
+      {selectedReturnHub && (
+        <div className="hub-options">
+          {/* <h4>Selected Hub Details:</h4> */}
+          {selectedReturnHub.map((hub) => (
+            <label key={hub.hubId} className="hub-option">
+              <input
+                type="radio"
+                name="hub"
+                value={hub.hubId}
+                onChange={() => {
+                  console.log("check" + hub.hubId);
+                  // setSelectedHub(hub.hubId); // Update the selected hub ID
+                  setCheckReturnHub(hub.hubId);
+                  setBookingInfo(prevInfo => ({ ...prevInfo, setCheckReturnHub: hub.hubId }));
+                  console.log("Selected Return Hub ID:", checkreturnhub);
+                }}
+              // Set any other necessary attributes for the radio button
+
+              />
+              <div className="hub-details">
+                <p><strong>Name:</strong> {hub.hubName}</p>
+                <p><strong>Opening Time:</strong> {hub.openingTime}</p>
+                {/* You can display other hub details as well */}
+              </div>
+            </label>
+          ))}
         </div>
-      </label>
-    ))}
-  </div>
-)}
+      )}
 
 
-{/* continue booking div tag style={{ position: 'absolute', width: '100%', textAlign: 'left', marginBottom: '20px' }} */}
+      {/* continue booking div tag style={{ position: 'absolute', width: '100%', textAlign: 'left', marginBottom: '20px' }} */}
 
 
       {/* anothe box div style={{ position: 'absolute', top: '150px', right: '150px', border: '1px solid #000', padding: '10px', width: '500px', height: '700px', marginTop: '20px', marginRight: '20px' }} */}
@@ -678,17 +677,17 @@ const handleSearch1 = () => {
         </h5>
       </div> */}
 
-{/* , border: '1px solid #000' */}
+      {/* , border: '1px solid #000' */}
       {/* <div style={{ position: 'absolute', top: '120px', right: '150px', padding: '10px', width: '300px', height: '300px', marginTop: '20px', marginRight: '20px' }}> */}
-  {/* <h5 style={{ textAlign: 'center' }}>Another Box</h5> */}
-  {/* <img src="/Images/droom.jpg" alt="human" style={{ width: '150%', height: 'auto' }} />
+      {/* <h5 style={{ textAlign: 'center' }}>Another Box</h5> */}
+      {/* <img src="/Images/droom.jpg" alt="human" style={{ width: '150%', height: 'auto' }} />
 </div> */}
-{/* <Link to="/VehicalSelection">Continue Booking</Link> */}
+      {/* <Link to="/VehicalSelection">Continue Booking</Link> */}
 
-{/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}> */}
-<button onClick={handleSubmit}  >Submit</button>
+      {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}> */}
+      <button onClick={handleSubmit}  >Submit</button>
+      </div>
+    </div>
 
-</div>
-    
   );
 }

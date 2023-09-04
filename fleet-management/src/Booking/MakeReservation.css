@@ -84,6 +84,17 @@
     font-style: italic; /* Add italic font style */
   }
 
+  #start2 {
+    /* Replace 'background-image.jpg' with the path to your background image file or URL */
+    background-image: url("C:\Users\Haji\Documents\GitHub\fleet-management-frontend\fleet-management\public\Images\himg4.jpg");
+    background-size: cover; /* Adjust the background size as needed */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* This keeps the background fixed while scrolling */
+    /* You can also set background color as a fallback */
+    background-color: #f5f5f5; /* Choose a suitable background color */
+    /* You may want to adjust other styles like background-position and background-attachment */
+    
+  }
   
   /* Add more custom styles as needed */
   
